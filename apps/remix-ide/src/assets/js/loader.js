@@ -49,7 +49,7 @@ const versionUrl = 'assets/version.json'
 fetch(versionUrl, { cache: "no-store" }).then(response => {
   response.text().then(function (data) {
     const version = JSON.parse(data);
-    console.log(`Loading Remix ${version.version}`);
+    console.log(`Loading Berith-IDE ${version.version}`);
     createScriptTag(`polyfills.${version.version}.${version.timestamp}.js`, 'module');
     if (version.mode === 'development') {
       createScriptTag(`vendor.${version.version}.${version.timestamp}.js`, 'module');

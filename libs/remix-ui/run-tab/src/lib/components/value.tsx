@@ -67,7 +67,7 @@ export function ValueUI (props: ValueProps) {
           <option data-unit="wei" value='wei'>Wei</option>
           <option data-unit="gwei" value="gwei">Gwei</option>
           <option data-unit="finney" value="finney">Finney</option>
-          <option data-unit="ether" value="ether">Ether</option>
+          <option data-unit="ether" value="ether">Bers</option>
         </select>
       </div>
     </div>

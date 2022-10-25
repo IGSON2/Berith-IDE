@@ -317,6 +317,11 @@ export const getFuncABIInputs = (plugin: RunTab, funcABI: FuncABI) => {
 export const updateInstanceBalance = (plugin: RunTab) => {
   if (plugin.REACT_API?.instances?.instanceList?.length) {
     for (const instance of plugin.REACT_API.instances.instanceList) {
+      // [Berith]
+      // address의 대,소문자 혼합으로 주소 검증에 실패하여 조치하기 위함
+      if (instance.contractData.name !== ''){
+        instance.address = instance.address.toLowerCase()
+      }
       plugin.blockchain.getBalanceInEther(instance.address, (err, balInEth) => {
         if (!err) instance.balance = balInEth
       })

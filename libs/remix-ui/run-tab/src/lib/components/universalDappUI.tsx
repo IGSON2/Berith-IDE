@@ -35,8 +35,8 @@ export function UniversalDappUI (props: UdappProps) {
   useEffect(() => {
     if (props.instance.address) {
       // @ts-ignore
-      let address = (props.instance.address.slice(0, 2) === '0x' ? '' : '0x') + props.instance.address.toString('hex')
-
+      // @ts-ignore
+      let address = (props.instance.address.indexOf("Bx") === -1 && props.instance.address.indexOf("bx") === -1? 'Bx' : '') + props.instance.address.toString('hex')
       address = ethJSUtil.toChecksumAddress(address)
       setAddress(address)
     }
@@ -237,7 +237,7 @@ export function UniversalDappUI (props: UdappProps) {
       <div className="udapp_cActionsWrapper" data-id="universalDappUiContractActionWrapper">
         <div className="udapp_contractActionsContainer">
         <div className="d-flex" data-id="instanceContractBal">
-          <label>Balance: {instanceBalance} ETH</label>
+          <label>Balance: {instanceBalance} BERS</label>
         </div>
           {
             contractABI && contractABI.map((funcABI, index) => {

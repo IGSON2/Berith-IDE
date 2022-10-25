@@ -90,7 +90,7 @@ export const isNumeric = (value) => {
 export const shortenAddress = (address, etherBalance?) => {
   const len = address.length
 
-  return address.slice(0, 5) + '...' + address.slice(len - 5, len) + (etherBalance ? ' (' + etherBalance.toString() + ' ether)' : '')
+  return address.slice(0, 5) + '...' + address.slice(len - 5, len) + (etherBalance ? ' (' + etherBalance.toString() + ' BERS)' : '')
 }
 
 export const addressToString = (address) => {
@@ -100,6 +100,9 @@ export const addressToString = (address) => {
   }
   if (address.indexOf('0x') === -1) {
     address = '0x' + address
+  }
+  if (address.substring(0,4)=="0xBx") {
+    address = address.slice(2)
   }
   return ethJSUtil.toChecksumAddress(address)
 }

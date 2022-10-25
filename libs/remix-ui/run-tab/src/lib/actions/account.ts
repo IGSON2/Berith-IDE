@@ -21,24 +21,28 @@ export const fillAccountsList = async (plugin: RunTab, dispatch: React.Dispatch<
   try {
     dispatch(fetchAccountsListRequest())
     const promise = plugin.blockchain.getAccounts()
-
     promise.then(async (accounts: string[]) => {
       const loadedAccounts = {}
 
       if (!accounts) accounts = []
+
       // allSettled is undefined..
       // so the current promise (all) will finish when:
       // - all the promises resolve
       // - at least one reject
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-      await (Promise as any).all(accounts.map((account) => {
-        return new Promise((resolve, reject) => {
-          plugin.blockchain.getBalanceInEther(account, (err, balance) => {
-            if (err) return reject(err)
-            const updated = shortenAddress(account, balance)
 
-            loadedAccounts[account] = updated
-            resolve(account)
+      await (Promise as any).all(accounts.map((account,i) => {
+        return new Promise((resolve, reject) => {
+          // [Berith] Fetch가 소문자로 정상 수신 되었지만
+          // 이후 알 수 없는 오류로 대 소문자가 섞이는 버그 조치
+          var lower_Account = 'Bx'+account.slice(2).toLowerCase()
+          accounts[i] = lower_Account
+          plugin.blockchain.getBalanceInEther(lower_Account, (err, balance) => {
+            if (err) return reject(err)
+            const updated = shortenAddress(lower_Account, balance)
+            loadedAccounts[lower_Account] = updated
+            resolve(lower_Account)
           })
         })
       }))
@@ -49,6 +53,7 @@ export const fillAccountsList = async (plugin: RunTab, dispatch: React.Dispatch<
 
         if (!(Object.keys(loadedAccounts).includes(selectedAddress))) setAccount(dispatch, null)
       }
+
       dispatch(fetchAccountsListSuccess(loadedAccounts))
     }).catch((e) => {
       dispatch(fetchAccountsListFailed(e.message))

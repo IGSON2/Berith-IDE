@@ -113,7 +113,7 @@ export const runTabInitialState: RunTabState = {
     selectedAccount: ''
   },
   sendValue: '0',
-  sendUnit: 'wei',
+  sendUnit: 'ether',
   gasLimit: 3000000,
   selectExEnv: 'vm-london',
   personalMode: false,

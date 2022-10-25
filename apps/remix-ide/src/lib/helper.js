@@ -11,8 +11,8 @@ module.exports = {
     if (typeof address !== 'string') {
       address = address.toString('hex')
     }
-    if (address.indexOf('0x') === -1) {
-      address = '0x' + address
+    if (address.indexOf("Bx") === -1 && address.indexOf("bx") === -1 ) {
+      address = 'Bx' + address
     }
     return ethJSUtil.toChecksumAddress(address)
   },
