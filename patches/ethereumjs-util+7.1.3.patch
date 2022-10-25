@@ -21,19 +21,21 @@ index de7c7f9..adcdbb4 100644
          if (parseInt(hash[i], 16) >= 8) {
              ret += address[i].toUpperCase();
 diff --git a/node_modules/ethereumjs-util/dist.browser/internal.js b/node_modules/ethereumjs-util/dist.browser/internal.js
-index 10051f6..6e0a91b 100644
+index 10051f6..6140912 100644
 --- a/node_modules/ethereumjs-util/dist.browser/internal.js
 +++ b/node_modules/ethereumjs-util/dist.browser/internal.js
-@@ -34,7 +34,7 @@ function isHexPrefixed(str) {
+@@ -34,7 +34,9 @@ function isHexPrefixed(str) {
      if (typeof str !== 'string') {
          throw new Error("[isHexPrefixed] input must be type 'string', received type " + typeof str);
      }
 -    return str[0] === '0' && str[1] === 'x';
-+    return str[0] === /^(B|b)/ && str[1] === /^(x|X)/;
++    // [Berith]
++    // Account or Transaction Hash prefix verify
++    return (str[0] === "B" || str[0] === "b" || str[0] == "0") && (str[1] ==="x" || str[1] === "X")
  }
  exports.isHexPrefixed = isHexPrefixed;
  /**
-@@ -181,7 +181,7 @@ exports.getKeys = getKeys;
+@@ -181,7 +183,7 @@ exports.getKeys = getKeys;
   * @returns  output the string is a hex string
   */
  function isHexString(value, length) {

@@ -1,12 +1,12 @@
 diff --git a/node_modules/@ethersproject/bytes/lib.esm/index.js b/node_modules/@ethersproject/bytes/lib.esm/index.js
-index 6415b66..197be26 100644
+index 6415b66..5db1fa8 100644
 --- a/node_modules/@ethersproject/bytes/lib.esm/index.js
 +++ b/node_modules/@ethersproject/bytes/lib.esm/index.js
 @@ -126,6 +126,12 @@ export function zeroPad(value, length) {
  }
  export function isHexString(value, length) {
      if (typeof (value) !== "string" || !value.match(/^0x[0-9A-Fa-f]*$/)) {
-+        if (typeof (value) === "string" || value.match(/^Bx[0-9A-Fa-f]*$/)){
++        if (typeof (value) === "string" && value.match(/^Bx[0-9A-Fa-f]*$/)){
 +            if (length && value.length !== 2 + 2 * length) {
 +                return false;
 +            }

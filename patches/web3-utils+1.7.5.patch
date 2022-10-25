@@ -43,7 +43,7 @@ index a8a4c31..f2a0018 100644
          // If ith character is 8 to f then make it uppercase
          if (parseInt(addressHash[i], 16) > 7) {
 diff --git a/node_modules/web3-utils/lib/utils.js b/node_modules/web3-utils/lib/utils.js
-index 5057309..43c8c39 100644
+index 5057309..041be42 100644
 --- a/node_modules/web3-utils/lib/utils.js
 +++ b/node_modules/web3-utils/lib/utils.js
 @@ -67,7 +67,7 @@ var toBN = function (number) {
@@ -60,12 +60,12 @@ index 5057309..43c8c39 100644
  var isAddress = function (address) {
      // check if it has the basic requirements of an address
 -    if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-+    if (!/^(bx|Bx|Bx|BX)?[0-9a-f]{40}$/i.test(address)) {
++    if (!/^(bx|Bx)?[0-9a-f]{40}$/i.test(address)) {
          return false;
          // If it's ALL lowercase or ALL upppercase
      }
 -    else if (/^(0x|0X)?[0-9a-f]{40}$/.test(address) || /^(0x|0X)?[0-9A-F]{40}$/.test(address)) {
-+    else if (/^(bx|Bx|Bx|BX)?[0-9a-f]{40}$/.test(address) || /^(bx|Bx|bX|BX)?[0-9A-F]{40}$/.test(address)) {
++    else if (/^(bx|Bx)?[0-9a-f]{40}$/.test(address) || /^(bx|Bx)?[0-9A-F]{40}$/.test(address)) {
          return true;
          // Otherwise check each case
      }
